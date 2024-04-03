@@ -1,7 +1,11 @@
-CREATE TABLE events (
-    id VARCHAR(255) NOT NULL PRIMARY KEY,
-    title VARCHAR(255) NOT NULL,
-    details VARCHAR(255) NOT NULL,
-    slug VARCHAR(255) NOT NULL,
-    maximum_attendees INTEGER NOT NULL
+CREATE TABLE check_ins (
+    id INTEGER NOT NULL PRIMARY KEY IDENTITY,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    attendee_id VARCHAR(255) NOT NULL,
+
+    CONSTRAINT check_ins_attendee_id_fkey
+    FOREIGN KEY (attendee_id)
+    REFERENCES attendees (id)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE
 );
