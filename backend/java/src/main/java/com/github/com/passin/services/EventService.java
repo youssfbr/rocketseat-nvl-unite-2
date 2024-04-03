@@ -6,6 +6,7 @@ import com.github.com.passin.api.dtos.events.EventResponseDTO;
 import com.github.com.passin.domain.event.Event;
 import com.github.com.passin.repositories.AttendeeRepository;
 import com.github.com.passin.repositories.EventRepository;
+import com.github.com.passin.services.exceptions.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +26,7 @@ public class EventService {
 
         return eventRepository.findById(eventId)
                 .map(event -> new EventResponseDTO(event , size))
-                .orElseThrow(() -> new RuntimeException(RESOURCE_NOT_FOUND_WITH_ID + eventId));
+                .orElseThrow(() -> new ResourceNotFoundException(RESOURCE_NOT_FOUND_WITH_ID + eventId));
     }
 
     public EventIdDTO createEvent(EventRequestDTO eventDTO) {
